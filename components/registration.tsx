@@ -65,7 +65,7 @@ export default function RegistrationForm() {
               <ContestantDetailsSection
                 form={form}
                 contestantsCount={contestantsCount}
-                setContestantsCount={setContestantsCount}
+                setContestantsCountAction={setContestantsCount}
               />
               <SubmissionSection form={form} />
 
