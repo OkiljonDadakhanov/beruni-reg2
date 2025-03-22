@@ -19,7 +19,7 @@ import {
   DialogClose,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { FileText, Download } from "lucide-react";
+import { Download } from "lucide-react";
 
 interface SubmissionSectionProps {
   form: UseFormReturn<z.infer<typeof formSchema>>;
@@ -104,7 +104,7 @@ export default function SubmissionSection({ form }: SubmissionSectionProps) {
 
       {/* Rules Dialog Modal */}
       <Dialog open={rulesOpen} onOpenChange={setRulesOpen}>
-        <DialogContent className="max-w-3xl max-h-[80vh] overflow-y-auto">
+        <DialogContent className="max-w-3xl max-h-[80vh] overflow-y-auto ">
           <DialogHeader>
             <DialogTitle>Olympiad Rules and Regulations</DialogTitle>
           </DialogHeader>
