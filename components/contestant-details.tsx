@@ -36,13 +36,13 @@ import type { z } from "zod";
 interface ContestantDetailsSectionProps {
   form: UseFormReturn<z.infer<typeof formSchema>>;
   contestantsCount: string;
-  setContestantsCount: (value: string) => void;
+  setContestantsCountAction: (value: string) => void;
 }
 
 export default function ContestantDetailsSection({
   form,
   contestantsCount,
-  setContestantsCount,
+  setContestantsCountAction,
 }: ContestantDetailsSectionProps) {
   // Update contestants array when contestantsCount changes
   useEffect(() => {
@@ -53,11 +53,15 @@ export default function ContestantDetailsSection({
     if (currentContestants.length < count) {
       const newContestants = [...currentContestants];
       for (let i = currentContestants.length; i < count; i++) {
+        // Add all required fields based on the form schema
         newContestants.push({
           name: "",
+          dob: new Date(), // Default to current date
           gender: "",
           subject: "",
           passportNumber: "",
+          passportExpiry: new Date(), // Default to current date
+          tshirtSize: "",
           specialRequirements: "",
         });
       }
@@ -83,7 +87,7 @@ export default function ContestantDetailsSection({
               <Select
                 onValueChange={(value) => {
                   field.onChange(value);
-                  setContestantsCount(value);
+                  setContestantsCountAction(value);
                 }}
                 defaultValue={field.value}
               >

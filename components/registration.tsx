@@ -35,8 +35,8 @@ export default function RegistrationForm() {
           specialRequirements: "",
         },
       ],
-      confirmAccuracy: false,
-      agreeToRules: false,
+      confirmAccuracy: true,
+      agreeToRules: true,
     },
   });
 
