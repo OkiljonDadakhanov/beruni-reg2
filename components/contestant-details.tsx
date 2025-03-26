@@ -82,7 +82,7 @@ export default function ContestantDetailsSection({
           render={({ field }) => (
             <FormItem className="max-w-xs">
               <FormLabel className="text-slate-700 font-medium">
-                Number of contestants from Chemistry
+                Number of contestants from Mathematics and Informatics
               </FormLabel>
               <Select
                 onValueChange={(value) => {
@@ -101,6 +101,8 @@ export default function ContestantDetailsSection({
                   <SelectItem value="2">2</SelectItem>
                   <SelectItem value="3">3</SelectItem>
                   <SelectItem value="4">4</SelectItem>
+                  <SelectItem value="5">5</SelectItem>
+                  <SelectItem value="6">6</SelectItem>
                 </SelectContent>
               </Select>
               <FormMessage className="text-red-500" />
@@ -239,7 +241,6 @@ export default function ContestantDetailsSection({
                             <SelectItem value="informatics">
                               Informatics
                             </SelectItem>
-                            <SelectItem value="chemistry">Chemistry</SelectItem>
                           </SelectContent>
                         </Select>
                         <FormMessage className="text-red-500" />

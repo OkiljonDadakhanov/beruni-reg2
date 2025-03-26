@@ -62,6 +62,7 @@ export default function RegistrationForm() {
             <CardContent className="p-0">
               <GeneralInformationSection form={form} />
               <TeamLeadersSection form={form} />
+              <TeamLeadersSection form={form} />
               <ContestantDetailsSection
                 form={form}
                 contestantsCount={contestantsCount}
