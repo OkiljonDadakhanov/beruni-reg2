@@ -44,7 +44,7 @@ export function GeneralInformationSection({
                     <SelectValue placeholder="Select country" />
                   </SelectTrigger>
                 </FormControl>
-                <SelectContent>
+                <SelectContent className="bg-white border border-slate-300 shadow-md rounded-md">
                   {countries.map((country) => (
                     <SelectItem key={country.id} value={country.id.toString()}>
                       {country.name}

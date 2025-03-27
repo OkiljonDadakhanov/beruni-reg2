@@ -65,7 +65,7 @@ export function TeamLeadersSection({ form, teamLeadersCount, setTeamLeadersCount
                     <SelectValue placeholder="Select number" />
                   </SelectTrigger>
                 </FormControl>
-                <SelectContent>
+                <SelectContent className="bg-white border border-slate-300 shadow-md rounded-md">
                   <SelectItem value="1">1</SelectItem>
                   <SelectItem value="2">2</SelectItem>
                 </SelectContent>
@@ -171,7 +171,7 @@ export function TeamLeadersSection({ form, teamLeadersCount, setTeamLeadersCount
                             <SelectValue placeholder="Select role" />
                           </SelectTrigger>
                         </FormControl>
-                        <SelectContent>
+                        <SelectContent className="bg-white border border-slate-300 shadow-md rounded-md">
                           <SelectItem value="Mathematics">Mathematics</SelectItem>
                           <SelectItem value="Informatics">Informatics</SelectItem>
                         </SelectContent>

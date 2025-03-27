@@ -77,7 +77,7 @@ export function ContestantDetailsSection({
                     <SelectValue placeholder="Select number" />
                   </SelectTrigger>
                 </FormControl>
-                <SelectContent>
+                <SelectContent className="bg-white border border-slate-300 shadow-md rounded-md">
                   <SelectItem value="1">1</SelectItem>
                   <SelectItem value="2">2</SelectItem>
                   <SelectItem value="3">3</SelectItem>
@@ -181,10 +181,9 @@ export function ContestantDetailsSection({
                               <SelectValue placeholder="Select gender" />
                             </SelectTrigger>
                           </FormControl>
-                          <SelectContent>
+                          <SelectContent className="bg-white border border-slate-300 shadow-md rounded-md">
                             <SelectItem value="Male">Male</SelectItem>
                             <SelectItem value="Female">Female</SelectItem>
-                            <SelectItem value="Other">Other</SelectItem>
                           </SelectContent>
                         </Select>
                         <FormMessage className="text-red-500" />
@@ -204,7 +203,7 @@ export function ContestantDetailsSection({
                               <SelectValue placeholder="Select subject" />
                             </SelectTrigger>
                           </FormControl>
-                          <SelectContent>
+                          <SelectContent className="bg-white border border-slate-300 shadow-md rounded-md">
                             <SelectItem value="Mathematics">Mathematics</SelectItem>
                             <SelectItem value="Informatics">Informatics</SelectItem>
                           </SelectContent>
@@ -271,7 +270,7 @@ export function ContestantDetailsSection({
                               <SelectValue placeholder="Select size" />
                             </SelectTrigger>
                           </FormControl>
-                          <SelectContent>
+                          <SelectContent className="bg-white border border-slate-300 shadow-md rounded-md">
                             <SelectItem value="XS">XS</SelectItem>
                             <SelectItem value="S">S</SelectItem>
                             <SelectItem value="M">M</SelectItem>
