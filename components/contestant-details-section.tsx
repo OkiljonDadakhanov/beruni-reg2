@@ -99,10 +99,15 @@ export function ContestantDetailsSection({
             <br />
             <span className="font-medium">(Required for all participants under 18 years old)</span>
           </p>
-          <Button type="button" variant="outline" className="bg-white border-blue-300 hover:bg-blue-50 text-blue-700">
-            <Download className="mr-2 h-4 w-4" />
-            Download Parental Consent Form
-          </Button>
+          <a href="/docs/form.pdf" target="_blank">
+
+            <Button type="button" variant="outline" className="bg-white border-blue-300 hover:bg-blue-50 text-blue-700">
+
+              <Download className="mr-2 h-4 w-4" />
+              Download Parental Consent Form
+            </Button>
+          </a>
+
         </div>
 
         <div className="space-y-6">

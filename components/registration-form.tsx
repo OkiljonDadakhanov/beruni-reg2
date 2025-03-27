@@ -22,6 +22,12 @@ export default function RegistrationForm() {
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState<string | null>(null)
+  const [isHydrated, setIsHydrated] = useState(false)
+
+  useEffect(() => {
+    setIsHydrated(true)
+  }, [])
+
 
   // Initialize the form
   const form = useForm<FormValues>({
@@ -91,7 +97,7 @@ export default function RegistrationForm() {
     }
   }
 
-  if (isLoading) {
+  if (!isHydrated || isLoading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <Loader2 className="h-8 w-8 animate-spin text-blue-600" />
@@ -129,10 +135,10 @@ export default function RegistrationForm() {
               />
               <SubmissionSection form={form} />
 
-              <div className="bg-slate-50 p-6 border-t border-slate-100">
+              <div className="bg-slate-50 p-6 border-t border-slate-100 space-y-4">
                 <Button
                   type="submit"
-                  className="w-full bg-blue-600 hover:bg-blue-700 text-white py-6 text-lg font-medium"
+                  className="w-full bg-blue-600 hover:bg-blue-700 text-white py-6 text-lg font-medium cursor-pointer"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? (
@@ -144,6 +150,20 @@ export default function RegistrationForm() {
                     "Submit Registration"
                   )}
                 </Button>
+
+                {/* Success message just below the button */}
+                {success && (
+                  <div className="w-full text-center bg-green-50 border border-green-200 text-green-700 py-3 px-4 rounded-md">
+                    {success}
+                  </div>
+                )}
+
+                {/* Error message here too, optional */}
+                {error && (
+                  <div className="w-full text-center bg-red-50 border border-red-200 text-red-700 py-3 px-4 rounded-md">
+                    {error}
+                  </div>
+                )}
               </div>
             </CardContent>
           </form>

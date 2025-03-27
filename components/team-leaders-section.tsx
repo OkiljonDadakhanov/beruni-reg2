@@ -78,7 +78,7 @@ export function TeamLeadersSection({ form, teamLeadersCount, setTeamLeadersCount
           name="total_accompanying_persons"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-slate-700 font-medium">Total Number of Accompanying Persons</FormLabel>
+              <FormLabel className="text-slate-700 font-medium">Total Number of Accompanying Persons (max 5 people)</FormLabel>
               <FormControl>
                 <Input
                   type="number"
@@ -262,13 +262,13 @@ export function TeamLeadersSection({ form, teamLeadersCount, setTeamLeadersCount
                   <div className="space-y-2">
                     <div className="flex items-center text-sm text-blue-600">
                       <Download className="h-4 w-4 mr-1" />
-                      <a href="#" className="hover:underline">
+                      <a href="/docs/passport.pdf" target="_blank" className="hover:underline">
                         Download Sample Passport Scan
                       </a>
                     </div>
                     <div className="flex items-center text-sm text-blue-600">
                       <Download className="h-4 w-4 mr-1" />
-                      <a href="#" className="hover:underline">
+                      <a href="/images/id_photo.png" target="_blank" className="hover:underline">
                         Download Sample ID Photo
                       </a>
                     </div>

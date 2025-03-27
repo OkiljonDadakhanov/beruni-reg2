@@ -30,15 +30,16 @@ export function SubmissionSection({ form }: SubmissionSectionProps) {
             signed copy of this document.
           </p>
           <div className="flex flex-col sm:flex-row gap-3">
-            <Button
-              type="button"
-              variant="outline"
-              className="bg-white border-slate-300 hover:bg-slate-50 text-slate-700"
-            >
-              <Download className="mr-2 h-4 w-4" />
-              Download Rules and Regulations
-            </Button>
-
+            <a href="docs/rules.pdf" target="_blank">
+              <Button
+                type="button"
+                variant="outline"
+                className="bg-white border-slate-300 hover:bg-slate-50 text-slate-700"
+              >
+                <Download className="mr-2 h-4 w-4" />
+                Download Rules and Regulations
+              </Button>
+            </a>
             <div className="flex-1">
               <Input
                 type="file"
@@ -105,7 +106,7 @@ export function SubmissionSection({ form }: SubmissionSectionProps) {
           )}
         />
       </div>
-    </SectionContainer>
+    </SectionContainer >
   )
 }
 
