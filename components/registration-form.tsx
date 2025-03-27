@@ -89,6 +89,42 @@ export default function RegistrationForm() {
 
       setSuccess("Registration submitted successfully!")
       console.log("Form submitted with response:", response)
+
+      form.reset({
+        country: "",
+        official_delegation_name: "",
+        total_accompanying_persons: "",
+        team_leaders_count: "1",
+        team_leaders: [
+          {
+            full_name: "",
+            email: "",
+            phone_number: "",
+            role: "",
+          },
+        ],
+        contestants_count: "1",
+        contestants: [
+          {
+            full_name: "",
+            gender: "",
+            competition_subject: "",
+            passport_number: "",
+            special_requirements: "",
+            t_shirt_size: "",
+            date_of_birth: undefined,
+            passport_expiry_date: undefined,
+            passport_scan: undefined,
+            id_photo: undefined,
+            parental_consent_form: undefined,
+          },
+        ],
+        confirm_information: false,
+        agree_rules: false,
+      })
+
+      setTeamLeadersCountAction("1")
+      setContestantsCountAction("1")
     } catch (error) {
       console.error("Error submitting form:", error)
       setError(error instanceof Error ? error.message : "Failed to submit registration")

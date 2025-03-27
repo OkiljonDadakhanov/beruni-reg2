@@ -40,7 +40,9 @@ export function ContestantDetailsSection({
           competition_subject: "",
           passport_number: "",
           special_requirements: "",
-          t_shirt_size: "", // ❗ REQUIRED
+          t_shirt_size: "",
+          passport_scan: new File([""], "placeholder.pdf"), // Provide an empty File instance
+          id_photo: new File([""], "placeholder.jpg"),
 
         })
       }
@@ -342,6 +344,7 @@ export function ContestantDetailsSection({
                           </FormControl>
                           <FormMessage className="text-red-500" />
                         </FormItem>
+
                       )}
                     />
 
@@ -422,6 +425,26 @@ export function ContestantDetailsSection({
                     />
                   </div>
                 </div>
+
+                <div className="mt-3 p-3 bg-blue-50 rounded-md border border-blue-100">
+                  <p className="text-sm text-blue-700 mb-2 font-medium">Sample Files:</p>
+                  <div className="space-y-2">
+                    <div className="flex items-center text-sm text-blue-600">
+                      <Download className="h-4 w-4 mr-1" />
+                      <a href="/docs/passport.pdf" target="_blank" className="hover:underline">
+                        Download Sample Passport Scan
+                      </a>
+                    </div>
+                    <div className="flex items-center text-sm text-blue-600">
+                      <Download className="h-4 w-4 mr-1" />
+                      <a href="/images/id_photo.png" target="_blank" className="hover:underline">
+                        Download Sample ID Photo
+                      </a>
+                    </div>
+
+                  </div>
+                </div>
+
               </CardContent>
             </Card>
           ))}

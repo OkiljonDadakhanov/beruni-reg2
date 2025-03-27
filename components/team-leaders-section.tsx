@@ -31,6 +31,8 @@ export function TeamLeadersSection({ form, teamLeadersCount, setTeamLeadersCount
           full_name: "",
           email: "",
           phone_number: "",
+          passport_scan: new File([""], "placeholder.pdf"), // Provide an empty File instance
+          id_photo: new File([""], "placeholder.jpg"),
           role: "",
         })
       }
@@ -275,6 +277,8 @@ export function TeamLeadersSection({ form, teamLeadersCount, setTeamLeadersCount
                   </div>
                 </div>
               </div>
+
+
             </CardContent>
           </Card>
         ))}
