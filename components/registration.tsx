@@ -14,9 +14,7 @@ import { formSchema } from "@/lib/schema";
 
 export default function RegistrationForm() {
   const [contestantsCount, setContestantsCount] = useState<string>("1");
-  const [teamLeadersCount, setTeamLeadersCount] = useState<string>("1");
 
-  // Initialize the form
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -26,14 +24,18 @@ export default function RegistrationForm() {
       leaderName: "",
       leaderEmail: "",
       leaderPhone: "",
+      leaderRole: "",
       accompanyingPersons: "",
       contestantsCount: "1",
       contestants: [
         {
           name: "",
+          dob: new Date(),
           gender: "",
           subject: "",
           passportNumber: "",
+          passportExpiry: new Date(),
+          tshirtSize: "",
           specialRequirements: "",
         },
       ],
@@ -42,7 +44,6 @@ export default function RegistrationForm() {
     },
   });
 
-  // Handle form submission
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log("Form submitted with values:", values);
     alert("Form submitted successfully!");
@@ -63,10 +64,7 @@ export default function RegistrationForm() {
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-0">
             <CardContent className="p-0">
               <GeneralInformationSection form={form} />
-              <TeamLeadersSection
-                form={form}
-                onTeamLeadersCountChange={setTeamLeadersCount}
-              />
+              <TeamLeadersSection form={form} />
               <ContestantDetailsSection
                 form={form}
                 contestantsCount={contestantsCount}
