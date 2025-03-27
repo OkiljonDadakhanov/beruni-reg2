@@ -78,22 +78,34 @@ export function TeamLeadersSection({ form, teamLeadersCount, setTeamLeadersCount
         <FormField
           control={form.control}
           name="total_accompanying_persons"
+          rules={{
+            min: { value: 0, message: "Number must be at least 0" },
+            max: { value: 5, message: "Maximum 5 people allowed" },
+          }}
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-slate-700 font-medium">Total Number of Accompanying Persons (max 5 people)</FormLabel>
+              <FormLabel className="text-slate-700 font-medium">
+                Total Number of Accompanying Persons (max 5 people)
+              </FormLabel>
               <FormControl>
-                <Input
-                  type="number"
-                  min="0"
-                  placeholder="Enter number"
-                  className="bg-white border-slate-300 h-11"
-                  {...field}
-                />
+                <Select onValueChange={field.onChange} defaultValue={field.value?.toString()}>
+                  <SelectTrigger className="w-full bg-white border-slate-300 h-11">
+                    <SelectValue placeholder="Select number" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-white border border-slate-300 shadow-md rounded-md">
+                    {[...Array(6).keys()].map((num) => (
+                      <SelectItem key={num} value={num.toString()}>
+                        {num}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </FormControl>
               <FormMessage className="text-red-500" />
             </FormItem>
           )}
         />
+
       </div>
 
       <div className="space-y-6">
