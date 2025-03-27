@@ -1,4 +1,4 @@
-import { z } from "zod"
+import { z } from "zod";
 
 // Define the contestant schema
 export const contestantSchema = z.object({
@@ -12,7 +12,7 @@ export const contestantSchema = z.object({
   }),
   tshirtSize: z.string().min(1, "T-shirt size is required"),
   specialRequirements: z.string().optional(),
-})
+});
 
 // Define the form schema
 export const formSchema = z.object({
@@ -32,5 +32,4 @@ export const formSchema = z.object({
   agreeToRules: z.literal(true, {
     errorMap: () => ({ message: "You must agree to the rules" }),
   }),
-})
-
+});

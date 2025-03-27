@@ -14,6 +14,7 @@ import { formSchema } from "@/lib/schema";
 
 export default function RegistrationForm() {
   const [contestantsCount, setContestantsCount] = useState<string>("1");
+  const [teamLeadersCount, setTeamLeadersCount] = useState<string>("1");
 
   // Initialize the form
   const form = useForm<z.infer<typeof formSchema>>({
@@ -21,6 +22,7 @@ export default function RegistrationForm() {
     defaultValues: {
       country: "",
       delegationName: "",
+      teamLeadersCount: "1",
       leaderName: "",
       leaderEmail: "",
       leaderPhone: "",
@@ -61,8 +63,10 @@ export default function RegistrationForm() {
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-0">
             <CardContent className="p-0">
               <GeneralInformationSection form={form} />
-              <TeamLeadersSection form={form} />
-              <TeamLeadersSection form={form} />
+              <TeamLeadersSection
+                form={form}
+                onTeamLeadersCountChange={setTeamLeadersCount}
+              />
               <ContestantDetailsSection
                 form={form}
                 contestantsCount={contestantsCount}

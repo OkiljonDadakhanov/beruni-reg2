@@ -26,7 +26,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
-import { CalendarIcon, Upload } from "lucide-react";
+import { CalendarIcon, Upload, Download } from "lucide-react";
 import { format } from "date-fns";
 import { SectionContainer } from "./section-container";
 import { Card, CardContent } from "@/components/ui/card";
@@ -73,6 +73,18 @@ export default function ContestantDetailsSection({
     }
   }, [contestantsCount, form]);
 
+  // Function to handle PDF download
+  const handleParentalConsentDownload = () => {
+    // Replace this with the actual path to your PDF file
+    const pdfUrl = "/downloads/parental-consent-form.pdf";
+    const link = document.createElement("a");
+    link.href = pdfUrl;
+    link.download = "Parental_Consent_Form.pdf";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <SectionContainer title="Contestant Details">
       <div className="grid grid-cols-1 gap-6">
@@ -109,6 +121,33 @@ export default function ContestantDetailsSection({
             </FormItem>
           )}
         />
+
+        {/* PDF Download Section */}
+        <div className="p-4 bg-slate-50 rounded-lg border border-slate-200 mb-4">
+          <h3 className="font-medium text-slate-700 mb-3">
+            Parental Consent Form
+          </h3>
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-slate-600 text-sm">
+                Download the official Parental Consent Form for contestants who
+                are minors
+              </p>
+              <p className="text-slate-500 text-xs mt-1">
+                (Required for all participants under 18 years old)
+              </p>
+            </div>
+            <Button
+              type="button"
+              variant="outline"
+              onClick={handleParentalConsentDownload}
+              className="bg-white border-slate-300 hover:bg-slate-50 text-slate-700"
+            >
+              <Download className="mr-2 h-4 w-4 text-slate-500" />
+              Download PDF
+            </Button>
+          </div>
+        </div>
 
         <div className="space-y-6">
           <div>
@@ -211,7 +250,6 @@ export default function ContestantDetailsSection({
                           <SelectContent>
                             <SelectItem value="male">Male</SelectItem>
                             <SelectItem value="female">Female</SelectItem>
-                            <SelectItem value="other">Other</SelectItem>
                           </SelectContent>
                         </Select>
                         <FormMessage className="text-red-500" />
