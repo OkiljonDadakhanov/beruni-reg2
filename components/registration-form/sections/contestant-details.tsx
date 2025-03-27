@@ -1,89 +1,56 @@
-"use client";
+"use client"
 
-import { useEffect } from "react";
-import type { UseFormReturn } from "react-hook-form";
-import {
-  FormField,
-  FormItem,
-  FormLabel,
-  FormControl,
-  FormDescription,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { Calendar } from "@/components/ui/calendar";
-import { CalendarIcon, Upload, Download } from "lucide-react";
-import { format } from "date-fns";
-import { SectionContainer } from "./section-container";
-import { Card, CardContent } from "@/components/ui/card";
-import type { formSchema } from "../lib/schema";
-import type { z } from "zod";
+import { useEffect } from "react"
+import type { UseFormReturn } from "react-hook-form"
+import { FormField, FormItem, FormLabel, FormControl, FormDescription, FormMessage } from "@/components/ui/form"
+import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
+import { Textarea } from "@/components/ui/textarea"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
+import { Calendar } from "@/components/ui/calendar"
+import { CalendarIcon, Upload } from "lucide-react"
+import { format } from "date-fns"
+import { SectionContainer } from "./section-container"
+import { Card, CardContent } from "@/components/ui/card"
+import type { formSchema } from "../schema"
+import type { z } from "zod"
 
 interface ContestantDetailsSectionProps {
-  form: UseFormReturn<z.infer<typeof formSchema>>;
-  contestantsCount: string;
-  setContestantsCountAction: (value: string) => void;
+  form: UseFormReturn<z.infer<typeof formSchema>>
+  contestantsCount: string
+  setContestantsCount: (value: string) => void
 }
 
 export default function ContestantDetailsSection({
   form,
   contestantsCount,
-  setContestantsCountAction,
+  setContestantsCount,
 }: ContestantDetailsSectionProps) {
   // Update contestants array when contestantsCount changes
   useEffect(() => {
-    const count = Number.parseInt(contestantsCount);
-    const currentContestants = form.getValues().contestants || [];
+    const count = Number.parseInt(contestantsCount)
+    const currentContestants = form.getValues().contestants || []
 
     // If we need more contestants, add them
     if (currentContestants.length < count) {
-      const newContestants = [...currentContestants];
+      const newContestants = [...currentContestants]
       for (let i = currentContestants.length; i < count; i++) {
-        // Add all required fields based on the form schema
         newContestants.push({
           name: "",
-          dob: new Date(), // Default to current date
           gender: "",
           subject: "",
           passportNumber: "",
-          passportExpiry: new Date(), // Default to current date
-          tshirtSize: "",
           specialRequirements: "",
-        });
+        })
       }
-      form.setValue("contestants", newContestants);
+      form.setValue("contestants", newContestants)
     }
     // If we need fewer contestants, remove them
     else if (currentContestants.length > count) {
-      form.setValue("contestants", currentContestants.slice(0, count));
+      form.setValue("contestants", currentContestants.slice(0, count))
     }
-  }, [contestantsCount, form]);
-
-  // Function to handle PDF download
-  const handleParentalConsentDownload = () => {
-    // Replace this with the actual path to your PDF file
-    const pdfUrl = "/downloads/parental-consent-form.pdf";
-    const link = document.createElement("a");
-    link.href = pdfUrl;
-    link.download = "Parental_Consent_Form.pdf";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
+  }, [contestantsCount, form])
 
   return (
     <SectionContainer title="Contestant Details">
@@ -93,13 +60,11 @@ export default function ContestantDetailsSection({
           name="contestantsCount"
           render={({ field }) => (
             <FormItem className="max-w-xs">
-              <FormLabel className="text-slate-700 font-medium">
-                Number of contestants from Mathematics and Informatics
-              </FormLabel>
+              <FormLabel className="text-slate-700 font-medium">Number of contestants from Chemistry</FormLabel>
               <Select
                 onValueChange={(value) => {
-                  field.onChange(value);
-                  setContestantsCountAction(value);
+                  field.onChange(value)
+                  setContestantsCount(value)
                 }}
                 defaultValue={field.value}
               >
@@ -113,8 +78,6 @@ export default function ContestantDetailsSection({
                   <SelectItem value="2">2</SelectItem>
                   <SelectItem value="3">3</SelectItem>
                   <SelectItem value="4">4</SelectItem>
-                  <SelectItem value="5">5</SelectItem>
-                  <SelectItem value="6">6</SelectItem>
                 </SelectContent>
               </Select>
               <FormMessage className="text-red-500" />
@@ -122,55 +85,19 @@ export default function ContestantDetailsSection({
           )}
         />
 
-        {/* PDF Download Section */}
-        <div className="p-4 bg-slate-50 rounded-lg border border-slate-200 mb-4">
-          <h3 className="font-medium text-slate-700 mb-3">
-            Parental Consent Form
-          </h3>
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-slate-600 text-sm">
-                Download the official Parental Consent Form for contestants who
-                are minors
-              </p>
-              <p className="text-slate-500 text-xs mt-1">
-                (Required for all participants under 18 years old)
-              </p>
-            </div>
-            <Button
-              type="button"
-              variant="outline"
-              onClick={handleParentalConsentDownload}
-              className="bg-white border-slate-300 hover:bg-slate-50 text-slate-700"
-            >
-              <Download className="mr-2 h-4 w-4 text-slate-500" />
-              Download PDF
-            </Button>
-          </div>
-        </div>
-
         <div className="space-y-6">
           <div>
-            <h3 className="text-slate-700 font-medium">
-              Contestant Information
-            </h3>
-            <p className="text-slate-500 text-sm mt-1">
-              For each contestant, the following details must be provided:
-            </p>
+            <h3 className="text-slate-700 font-medium">Contestant Information</h3>
+            <p className="text-slate-500 text-sm mt-1">For each contestant, the following details must be provided:</p>
           </div>
 
           {/* Dynamic contestant forms based on contestantsCount */}
           {Array.from({
             length: Number.parseInt(contestantsCount),
           }).map((_, index) => (
-            <Card
-              key={index}
-              className="border-slate-200 shadow-sm overflow-hidden"
-            >
+            <Card key={index} className="border-slate-200 shadow-sm overflow-hidden">
               <div className="bg-slate-50 px-4 py-3 border-b border-slate-200">
-                <h3 className="font-medium text-slate-700">
-                  Contestant {index + 1}
-                </h3>
+                <h3 className="font-medium text-slate-700">Contestant {index + 1}</h3>
               </div>
               <CardContent className="p-6 space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -179,15 +106,9 @@ export default function ContestantDetailsSection({
                     name={`contestants.${index}.name`}
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-slate-700 font-medium">
-                          Full Name (as in passport)
-                        </FormLabel>
+                        <FormLabel className="text-slate-700 font-medium">Full Name (as in passport)</FormLabel>
                         <FormControl>
-                          <Input
-                            placeholder="Enter full name"
-                            className="bg-white border-slate-300 h-11"
-                            {...field}
-                          />
+                          <Input placeholder="Enter full name" className="bg-white border-slate-300 h-11" {...field} />
                         </FormControl>
                         <FormMessage className="text-red-500" />
                       </FormItem>
@@ -199,9 +120,7 @@ export default function ContestantDetailsSection({
                     name={`contestants.${index}.dob`}
                     render={({ field }) => (
                       <FormItem className="flex flex-col">
-                        <FormLabel className="text-slate-700 font-medium">
-                          Date of Birth
-                        </FormLabel>
+                        <FormLabel className="text-slate-700 font-medium">Date of Birth</FormLabel>
                         <Popover>
                           <PopoverTrigger asChild>
                             <FormControl>
@@ -210,19 +129,12 @@ export default function ContestantDetailsSection({
                                 className="w-full justify-start text-left font-normal bg-white border-slate-300 h-11"
                               >
                                 <CalendarIcon className="mr-2 h-4 w-4 text-slate-500" />
-                                {field.value
-                                  ? format(field.value, "PPP")
-                                  : "Select date"}
+                                {field.value ? format(field.value, "PPP") : "Select date"}
                               </Button>
                             </FormControl>
                           </PopoverTrigger>
                           <PopoverContent className="w-auto p-0">
-                            <Calendar
-                              mode="single"
-                              selected={field.value}
-                              onSelect={field.onChange}
-                              initialFocus
-                            />
+                            <Calendar mode="single" selected={field.value} onSelect={field.onChange} initialFocus />
                           </PopoverContent>
                         </Popover>
                         <FormMessage className="text-red-500" />
@@ -235,13 +147,8 @@ export default function ContestantDetailsSection({
                     name={`contestants.${index}.gender`}
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-slate-700 font-medium">
-                          Gender
-                        </FormLabel>
-                        <Select
-                          onValueChange={field.onChange}
-                          defaultValue={field.value}
-                        >
+                        <FormLabel className="text-slate-700 font-medium">Gender</FormLabel>
+                        <Select onValueChange={field.onChange} defaultValue={field.value}>
                           <FormControl>
                             <SelectTrigger className="bg-white border-slate-300 h-11">
                               <SelectValue placeholder="Select gender" />
@@ -250,6 +157,7 @@ export default function ContestantDetailsSection({
                           <SelectContent>
                             <SelectItem value="male">Male</SelectItem>
                             <SelectItem value="female">Female</SelectItem>
+                            <SelectItem value="other">Other</SelectItem>
                           </SelectContent>
                         </Select>
                         <FormMessage className="text-red-500" />
@@ -262,13 +170,8 @@ export default function ContestantDetailsSection({
                     name={`contestants.${index}.subject`}
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-slate-700 font-medium">
-                          Competition Subject
-                        </FormLabel>
-                        <Select
-                          onValueChange={field.onChange}
-                          defaultValue={field.value}
-                        >
+                        <FormLabel className="text-slate-700 font-medium">Competition Subject</FormLabel>
+                        <Select onValueChange={field.onChange} defaultValue={field.value}>
                           <FormControl>
                             <SelectTrigger className="bg-white border-slate-300 h-11">
                               <SelectValue placeholder="Select subject" />
@@ -276,9 +179,8 @@ export default function ContestantDetailsSection({
                           </FormControl>
                           <SelectContent>
                             <SelectItem value="math">Math</SelectItem>
-                            <SelectItem value="informatics">
-                              Informatics
-                            </SelectItem>
+                            <SelectItem value="informatics">Informatics</SelectItem>
+                            <SelectItem value="chemistry">Chemistry</SelectItem>
                           </SelectContent>
                         </Select>
                         <FormMessage className="text-red-500" />
@@ -291,9 +193,7 @@ export default function ContestantDetailsSection({
                     name={`contestants.${index}.passportNumber`}
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-slate-700 font-medium">
-                          Passport Number
-                        </FormLabel>
+                        <FormLabel className="text-slate-700 font-medium">Passport Number</FormLabel>
                         <FormControl>
                           <Input
                             placeholder="Enter passport number"
@@ -311,9 +211,7 @@ export default function ContestantDetailsSection({
                     name={`contestants.${index}.passportExpiry`}
                     render={({ field }) => (
                       <FormItem className="flex flex-col">
-                        <FormLabel className="text-slate-700 font-medium">
-                          Passport Expiry Date
-                        </FormLabel>
+                        <FormLabel className="text-slate-700 font-medium">Passport Expiry Date</FormLabel>
                         <Popover>
                           <PopoverTrigger asChild>
                             <FormControl>
@@ -322,19 +220,12 @@ export default function ContestantDetailsSection({
                                 className="w-full justify-start text-left font-normal bg-white border-slate-300 h-11"
                               >
                                 <CalendarIcon className="mr-2 h-4 w-4 text-slate-500" />
-                                {field.value
-                                  ? format(field.value, "PPP")
-                                  : "Select date"}
+                                {field.value ? format(field.value, "PPP") : "Select date"}
                               </Button>
                             </FormControl>
                           </PopoverTrigger>
                           <PopoverContent className="w-auto p-0">
-                            <Calendar
-                              mode="single"
-                              selected={field.value}
-                              onSelect={field.onChange}
-                              initialFocus
-                            />
+                            <Calendar mode="single" selected={field.value} onSelect={field.onChange} initialFocus />
                           </PopoverContent>
                         </Popover>
                         <FormMessage className="text-red-500" />
@@ -349,13 +240,8 @@ export default function ContestantDetailsSection({
                     name={`contestants.${index}.tshirtSize`}
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-slate-700 font-medium">
-                          T-shirt Size
-                        </FormLabel>
-                        <Select
-                          onValueChange={field.onChange}
-                          defaultValue={field.value}
-                        >
+                        <FormLabel className="text-slate-700 font-medium">T-shirt Size</FormLabel>
+                        <Select onValueChange={field.onChange} defaultValue={field.value}>
                           <FormControl>
                             <SelectTrigger className="bg-white border-slate-300 h-11">
                               <SelectValue placeholder="Select size" />
@@ -381,9 +267,7 @@ export default function ContestantDetailsSection({
                   name={`contestants.${index}.specialRequirements`}
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-slate-700 font-medium">
-                        Special Requirements
-                      </FormLabel>
+                      <FormLabel className="text-slate-700 font-medium">Special Requirements</FormLabel>
                       <FormDescription className="text-slate-500 text-sm">
                         If any, e.g., dietary, medical, allergies, etc.
                       </FormDescription>
@@ -400,16 +284,14 @@ export default function ContestantDetailsSection({
                 />
 
                 <div className="p-4 bg-slate-50 rounded-lg border border-slate-200">
-                  <h3 className="font-medium text-slate-700 mb-3">
-                    File Uploads for Contestant
-                  </h3>
+                  <h3 className="font-medium text-slate-700 mb-3">File Uploads for Contestant</h3>
                   <div className="space-y-3">
                     <Button
                       type="button"
                       variant="outline"
                       className="w-full bg-white border-slate-300 hover:bg-slate-50 text-slate-700"
                     >
-                      <Upload className="mr-2 h-4 w-4 text-slate-500 cursor-pointer" />
+                      <Upload className="mr-2 h-4 w-4 text-slate-500" />
                       Upload Passport Scan (PDF/JPG)
                     </Button>
                     <Button
@@ -436,5 +318,6 @@ export default function ContestantDetailsSection({
         </div>
       </div>
     </SectionContainer>
-  );
+  )
 }
+

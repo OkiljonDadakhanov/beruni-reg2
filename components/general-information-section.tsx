@@ -1,31 +1,33 @@
-"use client";
+"use client"
+import type { UseFormReturn } from "react-hook-form"
 
-import type { UseFormReturn } from "react-hook-form";
 import {
   FormField,
   FormItem,
   FormLabel,
   FormControl,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+} from "@/components/ui/form"
+import { Input } from "@/components/ui/input"
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { SectionContainer } from "./section-container";
-import type { formSchema } from "../lib/schema";
-import type { z } from "zod";
+} from "@/components/ui/select"
+import { SectionContainer } from "@/components/section-container"
+import type { FormValues } from "@/lib/form-schema"
+import type { Country } from "@/lib/api"
 
 interface GeneralInformationSectionProps {
-  form: UseFormReturn<z.infer<typeof formSchema>>;
+  form: UseFormReturn<FormValues>
+  countries: Country[]
 }
 
-export default function GeneralInformationSection({
+export function GeneralInformationSection({
   form,
+  countries,
 }: GeneralInformationSectionProps) {
   return (
     <SectionContainer title="General Information">
@@ -35,26 +37,19 @@ export default function GeneralInformationSection({
           name="country"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-slate-700 font-medium">
-                Country
-              </FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <FormLabel className="text-slate-700 font-medium">Country</FormLabel>
+              <Select onValueChange={field.onChange} value={field.value}>
                 <FormControl>
                   <SelectTrigger className="bg-white border-slate-300 h-11">
                     <SelectValue placeholder="Select country" />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <SelectItem value="us">United States</SelectItem>
-                  <SelectItem value="uk">United Kingdom</SelectItem>
-                  <SelectItem value="ca">Canada</SelectItem>
-                  <SelectItem value="au">Australia</SelectItem>
-                  <SelectItem value="fr">France</SelectItem>
-                  <SelectItem value="de">Germany</SelectItem>
-                  <SelectItem value="jp">Japan</SelectItem>
-                  <SelectItem value="cn">China</SelectItem>
-                  <SelectItem value="in">India</SelectItem>
-                  <SelectItem value="br">Brazil</SelectItem>
+                  {countries.map((country) => (
+                    <SelectItem key={country.id} value={country.id.toString()}>
+                      {country.name}
+                    </SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
               <FormMessage className="text-red-500" />
@@ -64,7 +59,7 @@ export default function GeneralInformationSection({
 
         <FormField
           control={form.control}
-          name="delegationName"
+          name="official_delegation_name"
           render={({ field }) => (
             <FormItem>
               <FormLabel className="text-slate-700 font-medium">
@@ -83,5 +78,5 @@ export default function GeneralInformationSection({
         />
       </div>
     </SectionContainer>
-  );
+  )
 }
