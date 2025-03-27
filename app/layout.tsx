@@ -1,5 +1,4 @@
 import type React from "react"
-import { Toaster } from "@/components/toaster"
 import "@/app/globals.css"
 
 export default function RootLayout({
@@ -11,7 +10,6 @@ export default function RootLayout({
     <html lang="en">
       <body>
         {children}
-        <Toaster />
       </body>
     </html>
   )
