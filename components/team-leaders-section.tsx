@@ -110,7 +110,7 @@ export function TeamLeadersSection({ form, teamLeadersCount, setTeamLeadersCount
 
       <div className="space-y-6">
         {Array.from({ length: Number.parseInt(teamLeadersCount || "1") }).map((_, index) => (
-          <Card key={index} className="border-slate-200 shadow-sm overflow-hidden">
+          <Card key={index} className="border-slate-200 shadow-sm overflow-hidden sm:rounded-lg">
             <div className="bg-slate-50 px-4 py-3 border-b border-slate-200 flex justify-between items-center">
               <h3 className="font-medium text-slate-700">Team Leader {index + 1}</h3>
             </div>

@@ -1,12 +1,10 @@
 "use client"
 
-import { useState } from "react"
 import type { UseFormReturn } from "react-hook-form"
 import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Upload, Download, FileText } from "lucide-react"
+import { Download, FileText } from "lucide-react"
 import { SectionContainer } from "@/components/section-container"
 import type { FormValues } from "@/lib/form-schema"
 
@@ -15,7 +13,6 @@ interface SubmissionSectionProps {
 }
 
 export function SubmissionSection({ form }: SubmissionSectionProps) {
-  const [rulesDocument, setRulesDocument] = useState<File | null>(null)
 
   return (
     <SectionContainer title="Submission">
@@ -26,8 +23,7 @@ export function SubmissionSection({ form }: SubmissionSectionProps) {
             <h3 className="font-medium text-slate-800">Rules and Regulations</h3>
           </div>
           <p className="text-sm text-slate-600 mb-4">
-            Please download, read, and agree to the official rules and regulations of the Olympiad. You must upload the
-            signed copy of this document.
+            Please download, read, and agree to the official rules and regulations of the Olympiad.
           </p>
           <div className="flex flex-col sm:flex-row gap-3">
             <a href="docs/rules.pdf" target="_blank">
@@ -40,29 +36,7 @@ export function SubmissionSection({ form }: SubmissionSectionProps) {
                 Download Rules and Regulations
               </Button>
             </a>
-            <div className="flex-1">
-              <Input
-                type="file"
-                accept=".pdf"
-                className="hidden"
-                id="rules-regulations-file"
-                onChange={(e) => {
-                  const file = e.target.files?.[0]
-                  if (file) {
-                    setRulesDocument(file)
-                  }
-                }}
-              />
-              <Button
-                type="button"
-                variant="outline"
-                className="w-full bg-white border-slate-300 hover:bg-slate-50 text-slate-700"
-                onClick={() => document.getElementById("rules-regulations-file")?.click()}
-              >
-                <Upload className="mr-2 h-4 w-4 text-slate-500" />
-                {rulesDocument ? rulesDocument.name : "Upload Signed Rules Document (PDF)"}
-              </Button>
-            </div>
+
           </div>
         </div>
 
@@ -109,4 +83,3 @@ export function SubmissionSection({ form }: SubmissionSectionProps) {
     </SectionContainer >
   )
 }
-

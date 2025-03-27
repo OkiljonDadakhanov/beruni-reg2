@@ -91,7 +91,8 @@ export function ContestantDetailsSection({
           )}
         />
 
-        <div className="p-4 bg-blue-50 rounded-md border border-blue-100 mb-4">
+        <div className="p-3 sm:p-4 bg-blue-50 rounded-md border border-blue-100 mb-4">
+
           <div className="flex items-center mb-2">
             <Download className="h-5 w-5 mr-2 text-blue-600" />
             <h3 className="font-medium text-blue-700">Parental Consent Form</h3>
@@ -103,7 +104,7 @@ export function ContestantDetailsSection({
           </p>
           <a href="/docs/form.pdf" target="_blank">
 
-            <Button type="button" variant="outline" className="bg-white border-blue-300 hover:bg-blue-50 text-blue-700">
+            <Button type="button" variant="outline" className="w-full bg-white border-blue-300 hover:bg-blue-50 text-blue-700">
 
               <Download className="mr-2 h-4 w-4" />
               Download Parental Consent Form
@@ -122,12 +123,12 @@ export function ContestantDetailsSection({
           {Array.from({
             length: Number.parseInt(contestantsCount || "1"),
           }).map((_, index) => (
-            <Card key={index} className="border-slate-200 shadow-sm overflow-hidden">
+            <Card key={index} className="border-slate-200 shadow-sm overflow-hidden sm:rounded-lg">
               <div className="bg-slate-50 px-4 py-3 border-b border-slate-200">
                 <h3 className="font-medium text-slate-700">Contestant {index + 1}</h3>
               </div>
-              <CardContent className="p-6 space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <CardContent className="p-4 sm:p-6 space-y-6">
+                <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                   <FormField
                     control={form.control}
                     name={`contestants.${index}.full_name`}
@@ -160,7 +161,7 @@ export function ContestantDetailsSection({
                               </Button>
                             </FormControl>
                           </PopoverTrigger>
-                          <PopoverContent className="w-auto p-0 bg-white border border-slate-300 shadow-md rounded-md">
+                          <PopoverContent className="w-full max-w-xs sm:max-w-sm p-0 bg-white border border-slate-300 shadow-md rounded-md">
                             <Calendar mode="single" selected={field.value} onSelect={field.onChange} initialFocus />
                           </PopoverContent>
                         </Popover>
@@ -249,7 +250,7 @@ export function ContestantDetailsSection({
                               </Button>
                             </FormControl>
                           </PopoverTrigger>
-                          <PopoverContent className="w-auto p-0 bg-white border border-slate-300 shadow-md rounded-md">
+                          <PopoverContent className="w-full max-w-xs sm:max-w-sm p-0 bg-white border border-slate-300 shadow-md rounded-md">
                             <Calendar mode="single" selected={field.value} onSelect={field.onChange} initialFocus />
                           </PopoverContent>
                         </Popover>
@@ -408,14 +409,19 @@ export function ContestantDetailsSection({
                               <Button
                                 type="button"
                                 variant="outline"
-                                className="w-full bg-white border-slate-300 hover:bg-slate-50 text-slate-700"
+                                className="w-full bg-white border-slate-300 hover:bg-slate-50 text-slate-700 flex items-center justify-center px-4 py-2 text-sm text-center whitespace-nowrap"
                                 onClick={() => document.getElementById(`contestant-consent-form-${index}`)?.click()}
                               >
                                 <Upload className="mr-2 h-4 w-4 text-slate-500" />
-                                {value instanceof File
-                                  ? value.name
-                                  : "Upload Signed Parental Consent Form (for minors, PDF)"}
+                                <span className="truncate">
+                                  {value instanceof File
+                                    ? value.name
+                                    : "Upload Signed Parental Consent Form (for minors, PDF)"}
+                                </span>
                               </Button>
+
+
+
                             </div>
                           </FormControl>
                           <FormMessage className="text-red-500" />
