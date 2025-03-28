@@ -62,9 +62,14 @@ export function ContestantDetailsSection({
           name="contestants_count"
           render={({ field }) => (
             <FormItem className="max-w-xs">
+              <div className="mt-2 p-3 bg-red-100 border border-red-300 text-red-700 text-sm rounded-lg">
+                ⚠️ Only a maximum of <strong>4 Mathematics</strong> contestants and <strong>2 Informatics</strong> contestants are allowed. Applications exceeding this limit will <strong>not be accepted</strong>.
+              </div>
               <FormLabel className="text-slate-700 font-medium">
-                Number of contestants from Mathematics and Informatics
+                Overall number of contestants from Mathematics and Informatics
               </FormLabel>
+
+
               <Select
                 onValueChange={(value) => {
                   field.onChange(value)
