@@ -12,6 +12,7 @@ import { ContestantDetailsSection } from "@/components/contestant-details-sectio
 import { SubmissionSection } from "@/components/submission-section"
 import { formSchema, type FormValues } from "@/lib/form-schema"
 import { fetchCountries, type Country, submitRegistration, prepareFormData } from "@/lib/api"
+import Image from 'next/image'
 
 
 export default function RegistrationForm() {
@@ -152,9 +153,14 @@ export default function RegistrationForm() {
 
       <Card className="border-slate-200 shadow-md overflow-hidden">
         <CardHeader className="text-center bg-slate-50 border-b border-slate-100 py-8">
+          <div className="flex justify-center items-center gap-6 mb-4">
+            <Image src="/logo/olympic.png" alt="Logo 1" width={150} height={150} />
+            <Image src="/logo/khorazmi.png" alt="Logo 2" width={150} height={150} />
+          </div>
           <CardTitle className="text-3xl font-bold text-slate-800">Official Registration Form</CardTitle>
           <p className="text-slate-500 mt-2">Please complete all required fields accurately</p>
         </CardHeader>
+
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-0">
             <CardContent className="p-0">
