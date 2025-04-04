@@ -19,16 +19,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { Calendar } from "@/components/ui/calendar";
+
 import { CalendarIcon, Upload, Download } from "lucide-react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { format } from "date-fns";
 import { SectionContainer } from "@/components/section-container";
 import { Card, CardContent } from "@/components/ui/card";
 import type { FormValues } from "@/lib/form-schema";
