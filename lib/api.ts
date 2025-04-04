@@ -10,7 +10,7 @@ export interface Country {
 export async function fetchCountries(): Promise<Country[]> {
   try {
     const { data } = await axios.get(
-      "https://api.olympcenter.uz/api/countries"
+      "https://api.olympcentre.uz/api/countries"
     );
     return data;
   } catch (error) {
@@ -22,7 +22,7 @@ export async function fetchCountries(): Promise<Country[]> {
 export async function submitRegistration(formData: FormData): Promise<unknown> {
   try {
     const response = await fetch(
-      "https://api.olympcenter.uz/api/detailed-registrations/",
+      "https://api.olympcentre.uz/api/detailed-registrations/",
       {
         method: "POST",
         body: formData,

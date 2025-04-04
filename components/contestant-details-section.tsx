@@ -62,11 +62,9 @@ export function ContestantDetailsSection({
           name="contestants_count"
           render={({ field }) => (
             <FormItem className="max-w-xs">
-              <div className="mt-2 p-3 bg-red-100 border border-red-300 text-red-700 text-sm rounded-lg">
-                ⚠️ Only a maximum of <strong>4 Mathematics</strong> contestants and <strong>2 Informatics</strong> contestants are allowed. Applications exceeding this limit will <strong>not be accepted</strong>.
-              </div>
+             
               <FormLabel className="text-slate-700 font-medium">
-                Overall number of contestants from Mathematics and Informatics
+                Number of contestants from Chemistry
               </FormLabel>
 
 
@@ -87,8 +85,6 @@ export function ContestantDetailsSection({
                   <SelectItem value="2">2</SelectItem>
                   <SelectItem value="3">3</SelectItem>
                   <SelectItem value="4">4</SelectItem>
-                  <SelectItem value="5">5</SelectItem>
-                  <SelectItem value="6">6</SelectItem>
                 </SelectContent>
               </Select>
               <FormMessage className="text-red-500" />
