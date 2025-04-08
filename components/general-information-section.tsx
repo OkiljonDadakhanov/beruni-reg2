@@ -1,5 +1,5 @@
-"use client"
-import type { UseFormReturn } from "react-hook-form"
+"use client";
+import type { UseFormReturn } from "react-hook-form";
 
 import {
   FormField,
@@ -7,22 +7,22 @@ import {
   FormLabel,
   FormControl,
   FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
-import { SectionContainer } from "@/components/section-container"
-import type { FormValues } from "@/lib/form-schema"
-import type { Country } from "@/lib/api"
+} from "@/components/ui/select";
+import SectionContainer from "@/components/section-container";
+import type { FormValues } from "@/lib/form-schema";
+import type { Country } from "@/lib/api";
 
 interface GeneralInformationSectionProps {
-  form: UseFormReturn<FormValues>
-  countries: Country[]
+  form: UseFormReturn<FormValues>;
+  countries: Country[];
 }
 
 export function GeneralInformationSection({
@@ -37,7 +37,9 @@ export function GeneralInformationSection({
           name="country"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-slate-700 font-medium">Country</FormLabel>
+              <FormLabel className="text-slate-700 font-medium">
+                Country
+              </FormLabel>
               <Select onValueChange={field.onChange} value={field.value}>
                 <FormControl>
                   <SelectTrigger className="bg-white border-slate-300 h-11">
@@ -76,7 +78,34 @@ export function GeneralInformationSection({
             </FormItem>
           )}
         />
+
+        <FormField
+          control={form.control}
+          name="total_accompanying_persons"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel className="text-slate-700 font-medium">
+                Total Accompanying Persons
+              </FormLabel>
+              <Select onValueChange={field.onChange} value={field.value}>
+                <FormControl>
+                  <SelectTrigger className="bg-white border-slate-300 h-11">
+                    <SelectValue placeholder="Select a number (0–5)" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent className="bg-white border border-slate-300 shadow-md rounded-md">
+                  {["0", "1", "2", "3", "4", "5"].map((num) => (
+                    <SelectItem key={num} value={num}>
+                      {num}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              <FormMessage className="text-red-500" />
+            </FormItem>
+          )}
+        />
       </div>
     </SectionContainer>
-  )
+  );
 }

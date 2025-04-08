@@ -5,7 +5,6 @@ export const teamLeaderSchema = z.object({
   full_name: z.string().min(1, "Full name is required"),
   email: z.string().email("Invalid email address"),
   phone_number: z.string().min(1, "Phone number is required"),
-  role: z.string().min(1, "Role is required"),
   passport_scan: z.any().refine((file) => file instanceof File, {
     message: "Passport scan is required",
   }),
@@ -21,7 +20,6 @@ export const contestantSchema = z.object({
     .date({ required_error: "Date of birth is required" })
     .optional(),
   gender: z.string().min(1, "Gender is required"),
-  competition_subject: z.string().min(1, "Competition subject is required"),
   passport_number: z.string().min(1, "Passport number is required"),
   passport_expiry_date: z
     .date({
@@ -46,10 +44,12 @@ export const formSchema = z.object({
   total_accompanying_persons: z
     .string()
     .min(1, "Number of persons is required"),
-  team_leaders_count: z.string().min(1, "Number of team leaders is required"),
+  team_leaders_count: z.literal("1"), // Only one team leader allowed
+
   team_leaders: z
     .array(teamLeaderSchema)
-    .min(1, "At least one team leader is required"),
+    .length(1, "Exactly one team leader is required"),
+
   contestants_count: z.string().min(1, "Number of contestants is required"),
   contestants: z.array(contestantSchema),
   confirm_information: z.boolean().refine((val) => val === true, {

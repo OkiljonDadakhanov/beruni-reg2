@@ -23,7 +23,7 @@ import {
 import { CalendarIcon, Upload, Download } from "lucide-react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { SectionContainer } from "@/components/section-container";
+import SectionContainer  from "@/components/section-container";
 import { Card, CardContent } from "@/components/ui/card";
 import type { FormValues } from "@/lib/form-schema";
 
@@ -50,7 +50,6 @@ export function ContestantDetailsSection({
         newContestants.push({
           full_name: "",
           gender: "",
-          competition_subject: "",
           passport_number: "",
           special_requirements: "",
           t_shirt_size: "",

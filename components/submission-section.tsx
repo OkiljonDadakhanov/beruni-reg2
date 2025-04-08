@@ -5,7 +5,7 @@ import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/comp
 import { Checkbox } from "@/components/ui/checkbox"
 import { Button } from "@/components/ui/button"
 import { Download, FileText } from "lucide-react"
-import { SectionContainer } from "@/components/section-container"
+import  SectionContainer  from "@/components/section-container"
 import type { FormValues } from "@/lib/form-schema"
 
 interface SubmissionSectionProps {

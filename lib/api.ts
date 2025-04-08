@@ -63,7 +63,6 @@ export function prepareFormData(values: FormValues): FormData {
       `team_leaders[${index}][phone_number]`,
       leader.phone_number
     );
-    formData.append(`team_leaders[${index}][role]`, leader.role);
 
     if (leader.passport_scan instanceof File) {
       formData.append(
@@ -89,10 +88,7 @@ export function prepareFormData(values: FormValues): FormData {
     }
 
     formData.append(`contestants[${index}][gender]`, contestant.gender);
-    formData.append(
-      `contestants[${index}][competition_subject]`,
-      contestant.competition_subject
-    );
+   
     formData.append(
       `contestants[${index}][passport_number]`,
       contestant.passport_number
