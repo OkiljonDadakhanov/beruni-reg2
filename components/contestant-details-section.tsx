@@ -172,7 +172,7 @@ export function ContestantDetailsSection({
                     )}
                   />
 
-                  <FormField
+<FormField
                     control={form.control}
                     name={`contestants.${index}.date_of_birth`}
                     render={({ field }) => (
@@ -183,12 +183,16 @@ export function ContestantDetailsSection({
                         <FormControl>
                           <div className="relative">
                             <DatePicker
-                              selected={field.value}
-                              onChange={field.onChange}
+                              selected={field.value ?? null}
+                              onChange={(date) => field.onChange(date)}
                               dateFormat="PPP"
                               placeholderText="Select date"
+                              showYearDropdown // ✅ Enables year dropdown
+                              scrollableYearDropdown // ✅ Makes year dropdown scrollable (optional)
+                              yearDropdownItemNumber={100} // ✅ Shows 100 years in the dropdown (customizable)
                               className="w-full p-2 pr-10 text-left font-normal bg-white border border-slate-300 rounded-md h-11 focus:outline-none focus:ring-2 focus:ring-blue-500"
                             />
+
                             <CalendarIcon className="absolute top-3 right-3 h-4 w-4 text-slate-500" />
                           </div>
                         </FormControl>
@@ -224,37 +228,7 @@ export function ContestantDetailsSection({
                     )}
                   />
 
-                  <FormField
-                    control={form.control}
-                    name={`contestants.${index}.competition_subject`}
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-slate-700 font-medium">
-                          Competition Subject
-                        </FormLabel>
-                        <Select
-                          onValueChange={field.onChange}
-                          value={field.value}
-                        >
-                          <FormControl>
-                            <SelectTrigger className="bg-white border-slate-300 h-11">
-                              <SelectValue placeholder="Select subject" />
-                            </SelectTrigger>
-                          </FormControl>
-                          <SelectContent className="bg-white border border-slate-300 shadow-md rounded-md">
-                            <SelectItem value="Mathematics">
-                              Mathematics
-                            </SelectItem>
-                            <SelectItem value="Informatics">
-                              Informatics
-                            </SelectItem>
-                          </SelectContent>
-                        </Select>
-                        <FormMessage className="text-red-500" />
-                      </FormItem>
-                    )}
-                  />
-
+                  
                   <FormField
                     control={form.control}
                     name={`contestants.${index}.passport_number`}
@@ -275,7 +249,7 @@ export function ContestantDetailsSection({
                     )}
                   />
 
-                  <FormField
+<FormField
                     control={form.control}
                     name={`contestants.${index}.passport_expiry_date`}
                     render={({ field }) => (
@@ -286,10 +260,13 @@ export function ContestantDetailsSection({
                         <FormControl>
                           <div className="relative">
                             <DatePicker
-                              selected={field.value}
-                              onChange={field.onChange}
+                              selected={field.value ?? null}
+                              onChange={(date) => field.onChange(date)}
                               dateFormat="PPP"
                               placeholderText="Select date"
+                              showYearDropdown // ✅ Enables year dropdown
+                              scrollableYearDropdown // ✅ Makes year dropdown scrollable (optional)
+                              yearDropdownItemNumber={100} // ✅ Shows 100 years in the dropdown (customizable)
                               className="w-full p-2 pr-10 text-left font-normal bg-white border border-slate-300 rounded-md h-11 focus:outline-none focus:ring-2 focus:ring-blue-500"
                             />
                             <CalendarIcon className="absolute top-3 right-3 h-4 w-4 text-slate-500" />

@@ -171,27 +171,7 @@ export function TeamLeadersSection({ form, teamLeadersCount, setTeamLeadersCount
                   )}
                 />
 
-                <FormField
-                  control={form.control}
-                  name={`team_leaders.${index}.role`}
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-slate-700 font-medium">Role</FormLabel>
-                      <Select onValueChange={field.onChange} value={field.value}>
-                        <FormControl>
-                          <SelectTrigger className="bg-white border-slate-300 h-11">
-                            <SelectValue placeholder="Select role" />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent className="bg-white border border-slate-300 shadow-md rounded-md">
-                          <SelectItem value="Mathematics">Mathematics</SelectItem>
-                          <SelectItem value="Informatics">Informatics</SelectItem>
-                        </SelectContent>
-                      </Select>
-                      <FormMessage className="text-red-500" />
-                    </FormItem>
-                  )}
-                />
+          
               </div>
 
               <div className="p-4 bg-slate-50 rounded-lg border border-slate-200">
