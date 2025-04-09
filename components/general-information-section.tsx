@@ -90,11 +90,11 @@ export function GeneralInformationSection({
               <Select onValueChange={field.onChange} value={field.value}>
                 <FormControl>
                   <SelectTrigger className="bg-white border-slate-300 h-11">
-                    <SelectValue placeholder="Select a number (0–5)" />
+                    <SelectValue placeholder="Select a number (0–2)" />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent className="bg-white border border-slate-300 shadow-md rounded-md">
-                  {["0", "1", "2", "3", "4", "5"].map((num) => (
+                  {["0", "1", "2"].map((num) => (
                     <SelectItem key={num} value={num}>
                       {num}
                     </SelectItem>

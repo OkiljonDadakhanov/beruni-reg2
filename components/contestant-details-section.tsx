@@ -53,11 +53,11 @@ export function ContestantDetailsSection({
           passport_number: "",
           special_requirements: "",
           t_shirt_size: "",
-          passport_scan: new File([""], "placeholder.pdf"), // Provide an empty File instance
-          id_photo: new File([""], "placeholder.jpg"),
+          passport_scan: new File([""], " Passport Scan (PDF/JPG)"), // Provide an empty File instance
+          id_photo: new File([""], "ID-style Photo (JPG/PNG, high quality)"),
         });
       }
-      form.setValue("contestants", newContestants);
+      form.setValue("contestants", newContestants) 
     }
     // If we need fewer contestants, remove them
     else if (currentContestants.length > count) {

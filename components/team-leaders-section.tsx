@@ -30,7 +30,7 @@ export function TeamLeadersSection({ form }: TeamLeadersSectionProps) {
           email: "",
           phone_number: "",
           passport_scan: new File([""], "placeholder.pdf"),
-          id_photo: new File([""], "placeholder.jpg"),
+          id_photo: new File([""], "ID-style Photo (JPG/PNG, high quality)"),
         },
       ]);
     }
