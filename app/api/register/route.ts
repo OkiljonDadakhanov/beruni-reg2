@@ -29,7 +29,8 @@ export async function POST(request: Request) {
         const errorData = await response.json();
         errorMessage =
           errorData.message || errorData.detail || JSON.stringify(errorData);
-      } catch (parseError) {
+      } catch {
+        // If JSON parsing fails, try to get text response
         const errorText = await response.text();
         if (errorText) {
           errorMessage = errorText;

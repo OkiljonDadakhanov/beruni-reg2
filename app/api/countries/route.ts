@@ -13,7 +13,7 @@ export async function GET() {
         ...getAuthHeaders(),
       };
 
-      const response = await fetch(nextUrl, {
+      const response: Response = await fetch(nextUrl, {
         method: "GET",
         headers: headers,
         // Revalidate every 5 minutes
