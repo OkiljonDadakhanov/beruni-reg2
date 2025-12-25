@@ -72,11 +72,21 @@ export default function RegistrationForm() {
   useEffect(() => {
     async function loadCountries() {
       try {
+        setIsLoading(true);
+        setError(null);
         const data = await fetchCountries();
-        setCountries(data);
+        if (data && data.length > 0) {
+          setCountries(data);
+        } else {
+          setError("No countries available. Please check your connection and try again.");
+        }
       } catch (error) {
         console.error("Failed to load countries:", error);
-        setError("Failed to load countries. Please refresh the page.");
+        const errorMessage =
+          error instanceof Error
+            ? error.message
+            : "Failed to load countries. Please refresh the page.";
+        setError(errorMessage);
       } finally {
         setIsLoading(false);
       }

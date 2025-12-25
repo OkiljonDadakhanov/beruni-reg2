@@ -1,37 +1,59 @@
 import type { FormValues } from "./form-schema";
-import axios from "axios";
 
 export interface Country {
   id: number;
   name: string;
 }
 
-// Fetch countries from the API
+// Fetch countries from the API via Next.js API route (to avoid CORS issues)
 export async function fetchCountries(): Promise<Country[]> {
   try {
-    const { data } = await axios.get(
-      "https://api.olympcentre.uz/api/countries"
-    );
-    return data;
-  } catch (error) {
-    console.error("Error fetching countries:", error);
-    return [];
-  }
-}
-// Submit registration form
-export async function submitRegistration(formData: FormData): Promise<unknown> {
-  try {
-    const response = await fetch(
-      "https://api.olympcentre.uz/api/detailed-registrations/",
-      {
-        method: "POST",
-        body: formData,
-      }
-    );
+    const response = await fetch("/api/countries", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      cache: "no-store",
+    });
 
     if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(JSON.stringify(errorData));
+      const errorData = await response.json().catch(() => ({}));
+      const errorMessage =
+        errorData.error ||
+        `Failed to fetch countries: ${response.status} ${response.statusText}`;
+      throw new Error(errorMessage);
+    }
+
+    const data = await response.json();
+    
+    // The API route already handles response structure, so we should get an array
+    if (Array.isArray(data)) {
+      return data;
+    } else {
+      console.warn("Unexpected response structure from API route:", data);
+      return [];
+    }
+  } catch (error) {
+    console.error("Error fetching countries:", error);
+    // Re-throw to allow component to handle the error
+    throw error;
+  }
+}
+// Submit registration form via Next.js API route (to avoid CORS issues)
+export async function submitRegistration(formData: FormData): Promise<unknown> {
+  try {
+    const response = await fetch("/api/register", {
+      method: "POST",
+      body: formData,
+      // Don't set Content-Type header - browser will set it with boundary for FormData
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      const errorMessage =
+        errorData.error ||
+        `Failed to submit registration: ${response.status} ${response.statusText}`;
+      throw new Error(errorMessage);
     }
 
     return await response.json();
@@ -64,14 +86,14 @@ export function prepareFormData(values: FormValues): FormData {
       leader.phone_number
     );
 
-    if (leader.passport_scan instanceof File) {
+    if (leader.passport_scan instanceof File && leader.passport_scan.size > 0) {
       formData.append(
         `team_leaders[${index}][passport_scan]`,
         leader.passport_scan
       );
     }
 
-    if (leader.id_photo instanceof File) {
+    if (leader.id_photo instanceof File && leader.id_photo.size > 0) {
       formData.append(`team_leaders[${index}][id_photo]`, leader.id_photo);
     }
   });
@@ -113,18 +135,18 @@ export function prepareFormData(values: FormValues): FormData {
       );
     }
 
-    if (contestant.passport_scan instanceof File) {
+    if (contestant.passport_scan instanceof File && contestant.passport_scan.size > 0) {
       formData.append(
         `contestants[${index}][passport_scan]`,
         contestant.passport_scan
       );
     }
 
-    if (contestant.id_photo instanceof File) {
+    if (contestant.id_photo instanceof File && contestant.id_photo.size > 0) {
       formData.append(`contestants[${index}][id_photo]`, contestant.id_photo);
     }
 
-    if (contestant.parental_consent_form instanceof File) {
+    if (contestant.parental_consent_form instanceof File && contestant.parental_consent_form.size > 0) {
       formData.append(
         `contestants[${index}][parental_consent_form]`,
         contestant.parental_consent_form
